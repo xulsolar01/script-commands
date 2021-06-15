@@ -18,11 +18,14 @@
 # @raycast.author Antonio Dal Sie
 # @raycast.authorURL https://github.com/exodusanto
 
-if [[ "$1" != "on" && "$1" != "off" && "$1" != "toggle" ]]; then
-  echo "Unsupported parameter value: $1 (must be [on/off/toggle])"
-  exit 1
-fi
+respuesta=$(calm-notifications status)
 
-calm-notifications $1
+if [ "$respuesta" == "on" ]; then
+  semaforo="off"
+else
+  semaforo="on"
+fi 
+
+calm-notifications $semaforo
 sleep 2
 echo "Do Not Disturb $(calm-notifications status)"
